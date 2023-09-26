@@ -13,16 +13,17 @@ interface Props {
   searchParams: {
     date?: string
     price?: string
-    color?: string,
-    category?: string,
+    color?: string
+    category?: string
     size?: string
+    search?: string
   }
 }
 
 export default async function Page({searchParams}: Props) {
   //console.log(props)
   // await seedSanityData()  - gera os seed da pasta de seeds
-  const {date = 'desc', price, color, category, size } = searchParams
+  const { date = 'desc', price, color, category, size, search } = searchParams
   const priceOrder = price ? `| order(price ${price})` : ""
   const dateOrder = date ? `| order(_createdAt ${date})` : ""
   const order = `${priceOrder}${dateOrder}`
@@ -31,7 +32,8 @@ export default async function Page({searchParams}: Props) {
   const colorFilter =  color ? `&& "${color}" in colors` : ""
   const categoryFilter = category ? `&& "${category}" in categories` : ""
   const sizeFilter = size ? `&& "${size}" in sizes` : ""
-  const filter = `*[${productFilter}${colorFilter}${categoryFilter}${sizeFilter}] `
+  const searchFilter = search ? `&& name match "${search}"` : ""
+  const filter = `*[${productFilter}${colorFilter}${categoryFilter}${sizeFilter}${searchFilter}] `
 
   const products = await client.fetch<SanityProduct[]>(
     // groq`*[_type == "product"] | order(_createdAt desc) {
@@ -50,7 +52,7 @@ export default async function Page({searchParams}: Props) {
     }`
     
   )
-  console.log(products)
+  //console.log(products)
 
   return (
     <div>
