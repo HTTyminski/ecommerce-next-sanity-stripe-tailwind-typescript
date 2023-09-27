@@ -11,13 +11,13 @@ interface Props {
 
 export function CheckoutSession({ customerDetails }: Props) {
 
-  const {clearCart} = useShoppingCart()
+  const { clearCart } = useShoppingCart()
 
   useEffect(() => {
-    if(customerDetails){
-      clearCart()
-    }
-  }, [customerDetails])
+    clearCart()
+  }, [customerDetails,clearCart])
+
+
 
   if (!customerDetails) {
     return (
