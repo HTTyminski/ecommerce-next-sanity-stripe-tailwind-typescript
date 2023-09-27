@@ -19,6 +19,14 @@ export interface SanityProduct extends Omit<InventoryProduct, "images"> {
   _createdAt: Date
   slug: string
   images: Image[]
+  name: string
+  sku: string
+  price: number
+  currency: string
+  description: string
+  sizes: string[]
+  categories: string[]
+  colors: string[]
 }
 
 export const inventory: InventoryProduct[] = [
