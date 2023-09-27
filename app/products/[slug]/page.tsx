@@ -35,7 +35,9 @@ export default async function Page({ params }: Props) {
         {/* Product */}
         <div className="pb-20 lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-12">
           {/* Product gallery */}
+          {/* @ts-ignore */}
           <ProductGallery product={product}/>
+          {/* @ts-ignore */}
           <ProductInfo product={product}/>
           {/* Product info */}
         </div>
